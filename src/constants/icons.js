@@ -9,6 +9,7 @@ import growth from "../assets/icons/growth.svg";
 import clipboard from "../assets/icons/clipboard.svg";
 import clock from "../assets/icons/clock.svg";
 import bell from "../assets/icons/bell.svg";
+import instruction from "../assets/icons/instruction.svg";
 
 export default {
   menu,
@@ -21,5 +22,6 @@ export default {
   clipboard,
   clock,
   calendar,
-  bell
+  bell,
+  instruction
 };
