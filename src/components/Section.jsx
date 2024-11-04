@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SubHeader from './SubHeader'
 import { icons } from '../constants'
+import ChapterPart from './ChapterPart'
 
 const ACTIVE_TAB = {
     MENTOR_SESSIONS: 'MENTOR_SESSIONS',
@@ -18,7 +19,114 @@ const chapters = [
     {
         id: 1,
         title: 'Chapter 1',
-        duration: '05:00:00'
+        duration: '05:00:00',
+        parts: [
+            {
+                title: 'Part 1',
+                heading: 'Lorem ipsum dolor sit amet',
+                totalDuration: '02:00:00',
+                level: 'Medium',
+                progressPercent: 45,
+                lessonsLength: 5,
+                lessons: [
+                    {
+                        type: 'video',
+                        title: 'Video 1',
+                        duration: '10:00'
+                    },
+                    {
+                        type: 'text',
+                        title: 'Article 1',
+                        duration: '10:00'
+                    },
+                    {
+                        type: 'text',
+                        title: 'Quiz 1',
+                        duration: '10:00'
+                    },
+                    {
+                        type: 'coding',
+                        title: 'Coding Exercise 1',
+                        duration: '10:00'
+                    },
+                    {
+                        type: '',
+                        title: 'Combined Resource 1',
+                        duration: '10:00'
+                    },
+                ]
+            },
+            {
+                title: 'Part 2',
+                heading: 'Lorem ipsum dolor sit amet',
+                totalDuration: '02:00:00',
+                level: 'Medium',
+                progressPercent: 20,
+                lessonsLength: 12,
+                lessons: [
+                    {
+                        type: 'video',
+                        title: 'Video 1',
+                        duration: '10:00'
+                    },
+                    {
+                        type: 'text',
+                        title: 'Article 1',
+                        duration: '10:00'
+                    },
+                    {
+                        type: 'text',
+                        title: 'Quiz 1',
+                        duration: '10:00'
+                    },
+                    {
+                        type: 'coding',
+                        title: 'Coding Exercise 1',
+                        duration: '10:00'
+                    },
+                    {
+                        type: '',
+                        title: 'Combined Resource 1',
+                        duration: '10:00'
+                    },
+                ]
+            },
+            {
+                title: 'Part 3',
+                heading: 'Lorem ipsum dolor sit amet',
+                totalDuration: '02:00:00',
+                level: 'Medium',
+                progressPercent: 0,
+                lessonsLength: 12,
+                lessons: [
+                    {
+                        type: 'video',
+                        title: 'Video 1',
+                        duration: '10:00'
+                    },
+                    {
+                        type: 'text',
+                        title: 'Article 1',
+                        duration: '10:00'
+                    },
+                    {
+                        type: 'text',
+                        title: 'Quiz 1',
+                        duration: '10:00'
+                    },
+                    {
+                        type: 'coding',
+                        title: 'Coding Exercise 1',
+                        duration: '10:00'
+                    },
+                    {
+                        type: '',
+                        title: 'Combined Resource 1',
+                        duration: '10:00'
+                    },
+                ]
+            }
+        ]
     },
     {
         id: 2,
@@ -40,29 +148,36 @@ const chapters = [
 
 export default function Section() {
     const [activeTab, setActiveTab] = useState(ACTIVE_TAB.LEARNING_MATERIAL)
-    const [activeChapter, setActiveChapter] = useState(ACTIVE_CHAPTER.CHAPTER1)
+    const [activeChapterId, setActiveChapterId] = useState(chapters[0].id)
+    const [activeAccordion, setActiveAccordion] = useState(null);
+
+    const handleChapterClick = (id) => {
+        setActiveChapterId(id);
+    };
+
+    const activeChapter = chapters.find(chapter => chapter.id === activeChapterId);
 
     return (
-        <section className='h-full border border-highlight-2 rounded-xl p-6'>
+        <section className='h-full bg-white border border-highlight-2 rounded-xl p-6'>
 
             {/* Sub Header */}
             <SubHeader activeTab={activeTab} />
 
             <div className='pt-6 mt-6 border-t border-[#A4E6FF] ' />
 
-            <div className='flex gap-2'>
+            <div className=' flex gap-4'>
 
                 {/* Chapters Here */}
                 <ul className='w-full max-w-[250px]'>
 
                     {chapters.map(({ id, title, duration }) => (
-                        <li key={id} className={`flex items-center justify-between py-4 px-2 rounded-md mb-1 last:mb-0 cursor-pointer hover:bg-highlight-5 hover:font-bold ${title === activeChapter ? "bg-highlight-5 font-bold" : "font-normal"}`}>
-                            <h5 className={`text-base ${title === activeChapter ? 'font-bold' : ''}`}>{title}</h5>
+                        <li key={id} onClick={() => handleChapterClick(id)} className={`flex items-center justify-between py-4 px-2 rounded-md mb-1 last:mb-0 cursor-pointer hover:bg-highlight-5 hover:font-bold ${id === activeChapterId ? "bg-highlight-5 font-bold" : "font-normal"}`}>
+                            <h5 className={`text-base ${id === activeChapterId ? 'font-bold' : ''}`}>{title}</h5>
 
-                            {title === activeChapter && (
+                            {id === activeChapterId && (
                                 <div className='flex items-center gap-2'>
                                     <img src={icons.clock} alt="" className='w-4 h-4' />
-                                    <span className=''>{duration}</span>
+                                    <span className='text-[#608AD2] text-base font-normal'>{duration}</span>
                                 </div>
                             )}
                         </li>
@@ -72,9 +187,13 @@ export default function Section() {
 
 
                 {/* Accordion */}
-                <div className=''>
+                <ul className='w-full'>
 
-                </div>
+                    {activeChapter.parts && activeChapter.parts.map((part, index) => (
+                        <ChapterPart key={index} part={part} />
+                    ))}
+
+                </ul>
 
             </div>
         </section >

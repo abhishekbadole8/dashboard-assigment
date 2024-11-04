@@ -9,7 +9,7 @@ export default function UpSkill() {
       <Aside />
 
       {/* Main */}
-      <main className="w-full">
+      <main className="w-full h-full">
         <Header />
 
         <Section />
