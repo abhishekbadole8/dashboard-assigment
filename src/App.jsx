@@ -8,7 +8,7 @@ import Leaderboard from './pages/Leaderboard';
 function App() {
   return (
     <Router>
-      <div className='w-full h-screen p-14 flex bg-white-to-light-blue'>
+      <div className='w-full h-screen p-10 flex bg-white-to-light-blue font-sans'>
         <Routes>
           <Route path="/" element={<UpSkill />} />
           <Route path="/upskill" element={<UpSkill />} />

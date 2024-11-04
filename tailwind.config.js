@@ -9,6 +9,9 @@ export default {
       backgroundImage: {
         "white-to-light-blue": "linear-gradient(to bottom, #FFFFFF, #F1FBFF)",
       },
+      fontFamily: {
+        sans: ['"DM Sans"', 'sans-serif'],
+      },
     },
   },
   plugins: [],
